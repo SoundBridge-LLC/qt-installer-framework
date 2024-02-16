@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F35CC974-F2D1-3FA1-9195-FD46A5D1F485}</ProjectGuid>
+    <RootNamespace>7z</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <OutputDirectory>..\..\..\lib\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>7z</PrimaryOutput>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <OutputDirectory>..\..\..\lib\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>7z</PrimaryOutput>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <OutputDirectory>..\..\..\lib\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>7z</PrimaryOutput>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <OutputDirectory>..\..\..\lib\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>7z</PrimaryOutput>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\lib\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">7z</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">7z</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\lib\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">7z</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">7z</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\kdtools;..\installer;win\CPP;..;win\C;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiTools;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiPlugin;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWidgets;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWinExtras;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtGui;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtANGLE;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7\QtCore;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtConcurrent;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtQml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtNetwork;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtXml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore;release;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_NO_DEBUG;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\7z.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_NO_DEBUG;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\kdtools;..\installer;win\CPP;..;win\C;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiTools;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiPlugin;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWidgets;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWinExtras;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtGui;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtANGLE;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7\QtCore;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtConcurrent;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtQml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtNetwork;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtXml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore;release;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_NO_DEBUG;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\7z.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_NO_DEBUG;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\kdtools;..\installer;win\CPP;..;win\C;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiTools;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiPlugin;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWidgets;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWinExtras;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtGui;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtANGLE;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7\QtCore;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtConcurrent;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtQml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtNetwork;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtXml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore;debug;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\7z.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\kdtools;..\installer;win\CPP;..;win\C;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiTools;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtUiPlugin;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWidgets;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtWinExtras;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtGui;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtANGLE;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore\5.15.7\QtCore;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtConcurrent;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtQml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtNetwork;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtXml;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\include\QtCore;debug;$(SolutionDir)..\..\Dependencies\Win$(PlatformArchitecture)\Qt\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\7z.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_CAST_FROM_ASCII;QT_USE_QSTRINGBUILDER;_GIT_SHA1_=01b2836;IFW_VERSION_STR=2.0.2;IFW_VERSION=0x020002;IFW_REPOSITORY_FORMAT_VERSION=1.0.0;LUMIT_INSTALLER;WIN_LONG_PATH;_UNICODE;_NO_CRYPTO;_CRT_SECURE_NO_WARNINGS;QT_UITOOLS_LIB;QT_UIPLUGIN_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_GUI_LIB;QT_CONCURRENT_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zCompressionMode.cpp" />
+    <ClCompile Include="win\C\7zCrc.c" />
+    <ClCompile Include="win\C\7zCrcOpt.c" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zDecode.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zEncode.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zExtract.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zFolderInStream.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zFolderOutStream.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zHandler.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zHandlerOut.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zHeader.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zIn.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zOut.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zProperties.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zRegister.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zSpecStream.cpp" />
+    <ClCompile Include="win\C\7zStream.c" />
+    <ClCompile Include="win\CPP\7zip\Archive\7z\7zUpdate.cpp" />
+    <ClCompile Include="win\C\Alloc.c" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\ArchiveOpenCallback.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\Bcj2Coder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\Bcj2Register.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\BcjCoder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\BcjRegister.cpp" />
+    <ClCompile Include="win\C\Bra.c" />
+    <ClCompile Include="win\C\Bra86.c" />
+    <ClCompile Include="win\C\BraIA64.c" />
+    <ClCompile Include="win\CPP\7zip\Compress\BranchCoder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\BranchMisc.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\BranchRegister.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\ByteSwap.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\CWrappers.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\CoderMixer2.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\CoderMixer2MT.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\CopyCoder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\CopyRegister.cpp" />
+    <ClCompile Include="win\C\CpuArch.c" />
+    <ClCompile Include="win\CPP\7zip\Common\CreateCoder.cpp" />
+    <ClCompile Include="win\CPP\Windows\DLL.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\DefaultName.cpp" />
+    <ClCompile Include="win\C\Delta.c" />
+    <ClCompile Include="win\CPP\7zip\Compress\DeltaFilter.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\DummyOutStream.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\EnumDirItems.cpp" />
+    <ClCompile Include="win\CPP\Windows\FileDir.cpp" />
+    <ClCompile Include="win\CPP\Windows\FileFind.cpp" />
+    <ClCompile Include="win\CPP\Windows\FileIO.cpp" />
+    <ClCompile Include="win\CPP\Windows\FileName.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\FileStreams.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\FilterCoder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\HandlerOut.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\InBuffer.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\InOutTempBuffer.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\InStreamWithCRC.cpp" />
+    <ClCompile Include="win\CPP\Common\IntToString.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\ItemNameUtils.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\LimitedStreams.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\LoadCodecs.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\LockedStream.cpp" />
+    <ClCompile Include="win\C\LzFind.c" />
+    <ClCompile Include="win\C\LzFindMt.c" />
+    <ClCompile Include="win\C\Lzma2Dec.c" />
+    <ClCompile Include="win\CPP\7zip\Compress\Lzma2Decoder.cpp" />
+    <ClCompile Include="win\C\Lzma2Enc.c" />
+    <ClCompile Include="win\CPP\7zip\Compress\Lzma2Encoder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\Lzma2Register.cpp" />
+    <ClCompile Include="win\C\LzmaDec.c" />
+    <ClCompile Include="win\CPP\7zip\Compress\LzmaDecoder.cpp" />
+    <ClCompile Include="win\C\LzmaEnc.c" />
+    <ClCompile Include="win\CPP\7zip\Compress\LzmaEncoder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\LzmaHandler.cpp" />
+    <ClCompile Include="win\CPP\7zip\Compress\LzmaRegister.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\MethodId.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\MethodProps.cpp" />
+    <ClCompile Include="win\C\MtCoder.c" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\MultiStream.cpp" />
+    <ClCompile Include="win\CPP\Common\MyString.cpp" />
+    <ClCompile Include="win\CPP\Common\MyVector.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\OpenArchive.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\OutBuffer.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\OutStreamWithCRC.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\Common\ParseProperties.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\ProgressUtils.cpp" />
+    <ClCompile Include="win\CPP\Windows\PropVariant.cpp" />
+    <ClCompile Include="win\CPP\Windows\PropVariantConversions.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\SetProperties.cpp" />
+    <ClCompile Include="win\C\Sha256.c" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\SortUtils.cpp" />
+    <ClCompile Include="win\CPP\7zip\Archive\SplitHandler.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\StreamBinder.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\StreamObjects.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\StreamUtils.cpp" />
+    <ClCompile Include="win\CPP\Common\StringConvert.cpp" />
+    <ClCompile Include="win\CPP\Common\StringToInt.cpp" />
+    <ClCompile Include="win\CPP\Windows\System.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\TempFiles.cpp" />
+    <ClCompile Include="win\C\Threads.c" />
+    <ClCompile Include="win\CPP\Windows\Time.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\Update.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\UpdateAction.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\UpdateCallback.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\UpdatePair.cpp" />
+    <ClCompile Include="win\CPP\7zip\UI\Common\UpdateProduce.cpp" />
+    <ClCompile Include="win\CPP\7zip\Common\VirtThread.cpp" />
+    <ClCompile Include="win\CPP\Common\Wildcard.cpp" />
+    <ClCompile Include="win\C\Xz.c" />
+    <ClCompile Include="win\C\XzCrc64.c" />
+    <ClCompile Include="win\C\XzDec.c" />
+    <ClCompile Include="win\C\XzEnc.c" />
+    <ClCompile Include="win\CPP\7zip\Archive\XzHandler.cpp" />
+    <ClCompile Include="win\C\XzIn.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
