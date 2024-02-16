@@ -3,5 +3,10 @@
         <file>installer.png</file>
         <file>installer.ico</file>
         <file>installer.icns</file>
+        <file>vector/installer_bg.svg</file>
+        <file>vector/installer_logo.svg</file>
+        <file>vector/navigation_bg.svg</file>
+        <file>vector/navigation_highlight.svg</file>
+        <file>vector/right_bg.svg</file>
     </qresource>
 </RCC>

@@ -41,6 +41,7 @@ QT_BEGIN_NAMESPACE
 class QLabel;
 class QProgressBar;
 class QPushButton;
+class QToolButton;
 class QTimer;
 class QWidget;
 class QWinTaskbarButton;
@@ -80,7 +81,12 @@ private:
     QProgressBar *m_progressBar;
     QLabel *m_progressLabel;
     QLabel *m_downloadStatus;
-    QPushButton *m_detailsButton;
+#ifdef LUMIT_INSTALLER
+	QToolButton *m_detailsButton;
+	QWidget *m_detailsBrowserBackground;
+#else
+	QPushButton *m_detailsButton;
+#endif
     LazyPlainTextEdit *m_detailsBrowser;
     QTimer *m_updateTimer;
 

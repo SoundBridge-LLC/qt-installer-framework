@@ -571,6 +571,13 @@ void Component::loadUserInterfaces(const QDir &directory, const QStringList &uis
     if (qobject_cast<QApplication*> (qApp) == 0)
         return;
 
+	static QUiLoader loader;
+	loader.setTranslationEnabled(true);
+	loader.setLanguageChangeEnabled(true);
+#ifdef LUMIT_INSTALLER
+	loader.addPluginPath(qApp->applicationDirPath());
+#endif
+
     QDirIterator it(directory.path(), uis, QDir::Files);
     while (it.hasNext()) {
         QFile file(it.next());
@@ -579,9 +586,6 @@ void Component::loadUserInterfaces(const QDir &directory, const QStringList &uis
                 file.errorString()));
         }
 
-        static QUiLoader loader;
-        loader.setTranslationEnabled(true);
-        loader.setLanguageChangeEnabled(true);
         QWidget *const widget = loader.load(&file, 0);
         if (!widget) {
             throw Error(tr("Could not load the requested UI file '%1'. Error: %2").arg(it.fileName(),

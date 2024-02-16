@@ -981,7 +981,11 @@ void PackageManagerCorePrivate::writeMaintenanceToolBinary(QFile *const input, q
     qDebug() << "Writing maintenance tool:" << maintenanceToolRenamedName;
     ProgressCoordinator::instance()->emitLabelAndDetailTextChanged(tr("Writing maintenance tool."));
 
-    QTemporaryFile out;
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_WIN)
+    return;
+#endif
+
+    QFile out(generateTemporaryFileName());
     QInstaller::openForWrite(&out); // throws an exception in case of error
 
     if (!input->seek(0))
@@ -997,7 +1001,7 @@ void PackageManagerCorePrivate::writeMaintenanceToolBinary(QFile *const input, q
         resourcePath.cd(QLatin1String("Resources"));
         // It's a bit odd to have only the magic in the data file, but this simplifies
         // other code a lot (since installers don't have any appended data either)
-        QTemporaryFile dataOut;
+        QFile dataOut(generateTemporaryFileName());
         QInstaller::openForWrite(&dataOut);
         QInstaller::appendInt64(&dataOut, 0);   // operations start
         QInstaller::appendInt64(&dataOut, 0);   // operations end
@@ -1015,10 +1019,9 @@ void PackageManagerCorePrivate::writeMaintenanceToolBinary(QFile *const input, q
         }
 
         if (!dataOut.rename(resourcePath.filePath(QLatin1String("installer.dat")))) {
-            throw Error(tr("Could not write maintenance tool data to %1: %2").arg(out.fileName(),
-                out.errorString()));
+            throw Error(tr("Cannot write maintenance tool data to %1: %2").arg(dataOut.fileName(),
+                dataOut.errorString()));
         }
-        dataOut.setAutoRemove(false);
         dataOut.setPermissions(dataOut.permissions() | QFile::WriteUser | QFile::ReadGroup
             | QFile::ReadOther);
 #else
@@ -1050,6 +1053,11 @@ void PackageManagerCorePrivate::writeMaintenanceToolBinary(QFile *const input, q
         qDebug() << "Wrote permissions for maintenance tool.";
     } else {
         qDebug() << "Failed to write permissions for maintenance tool.";
+    }
+
+    if (out.exists() && !out.remove()) {
+        qWarning() << tr("Cannot remove temporary data file \"%1\": %2")
+            .arg(out.fileName(), out.errorString());
     }
 }
 
@@ -1197,6 +1205,16 @@ void PackageManagerCorePrivate::writeMaintenanceTool(OperationList performedOper
         performOperationThreaded(op, Backup);
         performOperationThreaded(op);
 
+#ifdef LUMIT_INSTALLER
+        // copy qt.conf if it exists
+        const QString configFileName = QLatin1String("qt.conf");
+        op = createOwnedOperation(QLatin1String("Copy"));
+        op->setArguments(QStringList() << (sourceAppDirPath + QLatin1String("/../Resources/") + configFileName)
+            << (targetAppDirPath + QLatin1String("/../Resources/") + configFileName));
+        performOperationThreaded(op, Backup);
+        performOperationThreaded(op);
+#endif
+
         // finally, copy everything within Frameworks and plugins
         op = createOwnedOperation(QLatin1String("CopyDirectory"));
         op->setArguments(QStringList() << (sourceAppDirPath + QLatin1String("/../Frameworks"))
@@ -1327,7 +1345,7 @@ void PackageManagerCorePrivate::writeMaintenanceTool(OperationList performedOper
         m_core->setValue(QLatin1String("installedOperationAreSorted"), QLatin1String("true"));
 
         try {
-            QTemporaryFile file;
+            QFile file(generateTemporaryFileName());
             QInstaller::openForWrite(&file);
 
             writeMaintenanceToolBinaryData(&file, &input, performedOperations, layout);
@@ -1343,7 +1361,6 @@ void PackageManagerCorePrivate::writeMaintenanceTool(OperationList performedOper
                 throw Error(tr("Could not write maintenance tool binary data to %1: %2")
                     .arg(file.fileName(), file.errorString()));
             }
-            file.setAutoRemove(false);
             file.setPermissions(file.permissions() | QFile::WriteUser | QFile::ReadGroup
                 | QFile::ReadOther);
         } catch (const Error &/*error*/) {
@@ -1369,9 +1386,11 @@ void PackageManagerCorePrivate::writeMaintenanceTool(OperationList performedOper
         deferredRename(dataFile + QLatin1String(".new"), dataFile, false);
 
         if (newBinaryWritten) {
+#if !defined(LUMIT_INSTALLER) || defined(Q_OS_DARWIN)
             const bool restart = replacementExists && isUpdater() && (!statusCanceledOrFailed()) && m_needsHardRestart;
             deferredRename(maintenanceToolName() + QLatin1String(".new"), maintenanceToolName(), restart);
             qDebug() << "Maintenance tool restart:" << (restart ? "true." : "false.");
+#endif
         }
     } catch (const Error &err) {
         setStatus(PackageManagerCore::Failure);
@@ -1557,9 +1576,15 @@ bool PackageManagerCorePrivate::runInstaller()
             }
         }
 
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_OSX)
+        // On Mac, we are installing Lumit.app directly to /Applications
+        // User can just delete Lumit.app from there for uninstallation
+        // We don't want to have Uninstaller.app
+#else
         emit m_core->titleMessageChanged(tr("Creating Maintenance Tool"));
 
         writeMaintenanceTool(m_performedOperationsOld + m_performedOperationsCurrentSession);
+#endif
 
         // fake a possible wrong value to show a full progress bar
         const int progress = ProgressCoordinator::instance()->progressInPercentage();
@@ -1782,6 +1807,15 @@ bool PackageManagerCorePrivate::runUninstaller()
         OperationList undoOperations = m_performedOperationsOld;
         std::reverse(undoOperations.begin(), undoOperations.end());
 
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_OSX)
+        // Manually add CreateDockIconOperation because this operation is not added in Installer phase.
+        // Note that this is for Uninstaller so CreateDockIconOperation will remove the dock icon.
+        QInstaller::Operation *removeDockIconOperation = KDUpdater::UpdateOperationFactory::instance().create(QLatin1String("CreateDockIcon"));
+        QStringList removeDockIconArgs = QStringList() << m_core->value(scBundleId);
+        removeDockIconOperation->setArguments(removeDockIconArgs);
+        undoOperations.push_back(removeDockIconOperation);
+#endif
+
         bool updateAdminRights = false;
         if (!adminRightsGained) {
             foreach (Operation *op, m_performedOperationsOld) {
@@ -1804,6 +1838,11 @@ bool PackageManagerCorePrivate::runUninstaller()
         // No operation delete here, as all old undo operations are deleted in the destructor.
 
         deleteMaintenanceTool();    // this will also delete the TargetDir on Windows
+
+#ifdef LUMIT_INSTALLER
+        QString shortcutLocation = m_core->value(QLatin1String("DesktopDir")) + QLatin1String("/") + m_core->value(scName) + QLatin1String(".lnk");
+        QFile::remove(shortcutLocation);
+#endif
 
         // If not on Windows, we need to remove TargetDir manually.
         if (QVariant(m_core->value(scRemoveTargetDir)).toBool() && !targetDir().isEmpty()) {
@@ -2025,7 +2064,7 @@ void PackageManagerCorePrivate::registerMaintenanceTool()
     const quint64 limit = std::numeric_limits<quint32>::max(); // maximum 32 bit value
     if (estimatedSizeKB <= limit)
         settings.setValue(QLatin1String("EstimatedSize"), static_cast<quint32>(estimatedSizeKB));
-    settings.setValue(QLatin1String("NoModify"), 0);
+    settings.setValue(QLatin1String("NoModify"), 1);
     settings.setValue(QLatin1String("NoRepair"), 1);
 #endif
 }

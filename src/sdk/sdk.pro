@@ -5,19 +5,19 @@ TARGET = installerbase
 include(../../installerfw.pri)
 
 QT += network qml xml widgets
-# add the minimal plugin in static build to be able to start the installer headless with:
-# installer-binary -platform minimal
-# using QT += qpa_minimal_plugin would result in a minimal only compiled version
-!win32:CONFIG(static, static|shared) {
-    QTPLUGIN += qminimal
-}
+## add the minimal plugin in static build to be able to start the installer headless with:
+## installer-binary -platform minimal
+## using QT += qpa_minimal_plugin would result in a minimal only compiled version
+#!win32:CONFIG(static, static|shared) {
+#    QTPLUGIN += qminimal
+#}
 
-CONFIG(static, static|shared) {
-  # prevent qmake from automatically linking in imageformats, bearer, qmltooling plugins
-  QTPLUGIN.imageformats = -
-  QTPLUGIN.bearer = -
-  QTPLUGIN.qmltooling = -
-}
+#CONFIG(static, static|shared) {
+#  # prevent qmake from automatically linking in imageformats, bearer, qmltooling plugins
+#  QTPLUGIN.imageformats = -
+#  QTPLUGIN.bearer = -
+#  QTPLUGIN.qmltooling = -
+#}
 
 DESTDIR = $$IFW_APP_PATH
 
@@ -142,3 +142,9 @@ win32 {
 }
 
 macx:include(../../no_app_bundle.pri)
+
+# LUMIT_INSTALLER
+INCLUDEPATH += $$PWD/../../../../Core/Sources \
+    $$PWD/../../../../VectorWidgets/Sources
+LIBS += -lVectorWidgets
+LIBS += -L$$PWD/../../../../Bin/Mac

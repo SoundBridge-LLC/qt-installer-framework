@@ -213,8 +213,10 @@ static int assemble(Input input, const QInstaller::Settings &settings)
             tempFile, instExe.errorString()));
     }
 
+#ifndef LUMIT_INSTALLER
     QtPatch::patchBinaryFile(tempFile, QByteArray("MY_InstallerCreateDateTime_MY"),
         QDateTime::currentDateTime().toString(QLatin1String("yyyy-MM-dd - HH:mm:ss")).toLatin1());
+#endif
 
 
     input.installerExePath = tempFile;

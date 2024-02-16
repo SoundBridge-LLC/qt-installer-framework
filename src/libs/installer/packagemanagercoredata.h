@@ -44,6 +44,7 @@ class PackageManagerCoreData
 public:
     PackageManagerCoreData() {}
     explicit PackageManagerCoreData(const QHash<QString, QString> &variables);
+    ~PackageManagerCoreData();
 
     void clear();
 

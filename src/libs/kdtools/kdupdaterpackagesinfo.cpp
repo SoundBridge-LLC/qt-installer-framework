@@ -412,6 +412,11 @@ static void addTextChildHelper(QDomNode *node,
 */
 void PackagesInfo::writeToDisk()
 {
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_OSX)
+    // On Mac, we are installing Lumit.app directly into /Applications
+    // We don't want to have any other files created there
+    // So we are not writing components.xml here
+#else
     if (d->modified && (!d->packageInfoList.isEmpty() || QFile::exists(d->fileName))) {
         QDomDocument doc;
         QDomElement root = doc.createElement(QLatin1String("Packages")) ;
@@ -459,6 +464,7 @@ void PackagesInfo::writeToDisk()
         file.close();
         d->modified = false;
     }
+#endif
 }
 
 void PackagesInfo::PackagesInfoData::addPackageFrom(const QDomElement &packageE)

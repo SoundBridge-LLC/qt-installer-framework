@@ -40,6 +40,10 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 
+#ifdef LUMIT_INSTALLER
+#include "MessageDialog.h"
+#endif
+
 /*!
     \inmodule QtInstallerFramework
     \class QInstaller::MessageBoxHandler
@@ -367,6 +371,67 @@ static QMessageBox::StandardButton showNewMessageBox(QWidget *parent, QMessageBo
     const QString &title, const QString &text, QMessageBox::StandardButtons buttons,
     QMessageBox::StandardButton defaultButton)
 {
+#ifdef LUMIT_INSTALLER
+    std::map<QMessageBox::StandardButton, QString> titleMap;
+    titleMap[QMessageBox::Ok] = QLatin1String("OK");
+    titleMap[QMessageBox::Save] = QLatin1String("Save");
+    titleMap[QMessageBox::SaveAll] = QLatin1String("SaveAll");
+    titleMap[QMessageBox::Open] = QLatin1String("Open");
+    titleMap[QMessageBox::Yes] = QLatin1String("Yes");
+    titleMap[QMessageBox::YesToAll] = QLatin1String("YesToAll");
+    titleMap[QMessageBox::No] = QLatin1String("No");
+    titleMap[QMessageBox::NoToAll] = QLatin1String("NoToAll");
+    titleMap[QMessageBox::Abort] = QLatin1String("Abort");
+    titleMap[QMessageBox::Retry] = QLatin1String("Retry");
+    titleMap[QMessageBox::Ignore] = QLatin1String("Ignore");
+    titleMap[QMessageBox::Close] = QLatin1String("Close");
+    titleMap[QMessageBox::Cancel] = QLatin1String("Cancel");
+    titleMap[QMessageBox::Discard] = QLatin1String("Discard");
+    titleMap[QMessageBox::Help] = QLatin1String("Help");
+    titleMap[QMessageBox::Apply] = QLatin1String("Apply");
+    titleMap[QMessageBox::Reset] = QLatin1String("Reset");
+    titleMap[QMessageBox::RestoreDefaults] = QLatin1String("RestoreDefaults");
+
+    int allButtonCount = 0;
+    int buttonCount = 0;
+    {
+        uint mask = QMessageBox::FirstButton;
+        while(mask <= QMessageBox::LastButton) {
+            uint sb = buttons & mask;
+            mask <<= 1;
+            if(!sb)
+                continue;
+
+            if(titleMap.find((QMessageBox::StandardButton)sb) != titleMap.end()) {
+                buttonCount++;
+            }
+
+            allButtonCount++;
+            
+        }
+    }
+
+    if(buttonCount <= 4 && buttonCount == allButtonCount)
+    {
+        MessageDialog messageDialog((MessageDialog::IconType)icon, text, MessageDialog::BT_NoButton, parent);
+
+        uint mask = QMessageBox::FirstButton;
+        while(mask <= QMessageBox::LastButton) {
+            uint sb = buttons & mask;
+            mask <<= 1;
+            if(!sb)
+                continue;
+
+            messageDialog.addButton(titleMap[(QMessageBox::StandardButton)sb], (MessageDialog::ButtonType)sb);
+        }
+
+        messageDialog.setEscapeButton((MessageDialog::ButtonType)QMessageBox::Cancel);
+        messageDialog.setDefaultButton((MessageDialog::ButtonType)defaultButton);
+
+        return (QMessageBox::StandardButton)messageDialog.exec();
+    }
+#endif
+
     QMessageBox msgBox(icon, title, text, QMessageBox::NoButton, parent);
     QDialogButtonBox *buttonBox = msgBox.findChild<QDialogButtonBox *>();
     Q_ASSERT(buttonBox != 0);

@@ -41,10 +41,12 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QToolButton>
 #include <QScrollBar>
 #include <QVBoxLayout>
 
 #include <QtCore/QTimer>
+#include <QtUiTools/QUiLoader>
 
 #ifdef Q_OS_WIN
 # include <QWinTaskbarButton>
@@ -106,6 +108,34 @@ void PerformInstallationForm::setupUi(QWidget *widget)
     QVBoxLayout *baseLayout = new QVBoxLayout(widget);
     baseLayout->setObjectName(QLatin1String("BaseLayout"));
 
+#ifdef LUMIT_INSTALLER
+	static QUiLoader loader;
+	loader.setTranslationEnabled(true);
+	loader.setLanguageChangeEnabled(true);
+	loader.addPluginPath(qApp->applicationDirPath());
+
+	QFile file(QLatin1String(":/lumit/performinstallationwidget.ui"));
+	file.open(QFile::ReadOnly);
+
+	QWidget *pageWidget = loader.load(&file, widget);
+	baseLayout->addWidget(pageWidget);
+	baseLayout->setContentsMargins(0, 0, 0, 0);
+
+	m_progressBar = pageWidget->findChild<QProgressBar*>(QLatin1String("m_progressBar_referencedInCpp"));
+	m_progressLabel = pageWidget->findChild<QLabel*>(QLatin1String("m_progressLabel_referencedInCpp"));
+	m_detailsButton = pageWidget->findChild<QToolButton*>(QLatin1String("m_detailsButton_referencedInCpp"));
+	m_detailsBrowserBackground = pageWidget->findChild<QWidget*>(QLatin1String("m_detailsBrowserBackground_referencedInCpp"));
+
+	m_detailsBrowser = new LazyPlainTextEdit(m_detailsBrowserBackground);
+	m_detailsBrowser->setReadOnly(true);
+	m_detailsBrowser->setWordWrapMode(QTextOption::NoWrap);
+	m_detailsBrowser->setObjectName(QLatin1String("DetailsBrowser")); // this is referenced in stylesheet.css so don't change it
+	m_detailsBrowser->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_detailsBrowser->setContextMenuPolicy(Qt::ContextMenuPolicy::NoContextMenu);
+	m_detailsBrowserBackground->layout()->addWidget(m_detailsBrowser);
+
+	connect(m_detailsButton, SIGNAL(clicked()), this, SLOT(toggleDetails()));
+#else
     QVBoxLayout *topLayout = new QVBoxLayout();
     topLayout->setObjectName(QLatin1String("TopLayout"));
 
@@ -146,6 +176,7 @@ void PerformInstallationForm::setupUi(QWidget *widget)
     bottomLayout->setStretch(1, 10);
     baseLayout->addLayout(topLayout);
     baseLayout->addLayout(bottomLayout);
+#endif
 
     m_updateTimer = new QTimer(widget);
     connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(updateProgress())); //updateProgress includes label
@@ -203,8 +234,14 @@ void PerformInstallationForm::updateProgress()
 void PerformInstallationForm::toggleDetails()
 {
     const bool willShow = !isShowingDetails();
+#ifdef LUMIT_INSTALLER
+	m_detailsButton->setText(willShow ? tr("Hide Details") : tr("Show Details"));
+	m_detailsBrowserBackground->setVisible(willShow);
+	m_detailsBrowser->setVisible(true); // parent's visibility is managed by outside, but child should always be visible
+#else
     m_detailsButton->setText(willShow ? tr("&Hide Details") : tr("&Show Details"));
-    m_detailsBrowser->setVisible(willShow);
+	m_detailsBrowser->setVisible(willShow);
+#endif
     emit showDetailsChanged();
 }
 
@@ -223,8 +260,13 @@ void PerformInstallationForm::clearDetailsBrowser()
 void PerformInstallationForm::enableDetails()
 {
     m_detailsButton->setEnabled(true);
-    m_detailsButton->setText(tr("&Show Details"));
-    m_detailsBrowser->setVisible(false);
+#ifdef LUMIT_INSTALLER
+    m_detailsButton->setText(tr("Show Details"));
+	m_detailsBrowserBackground->setVisible(false);
+#else
+	m_detailsButton->setText(tr("&Show Details"));
+	m_detailsBrowser->setVisible(false);
+#endif
 }
 
 /*!

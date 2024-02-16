@@ -85,9 +85,16 @@ public:
 
     enum WizardPage {
         Introduction = 0x1000,
+#ifdef LUMIT_INSTALLER
+        CustomIntroduction = Introduction + 1,
+        LicenseCheck = 0x2000,
+        TargetDirectory = 0x3000,
+        ComponentSelection = 0x4000,
+#else
         TargetDirectory = 0x2000,
         ComponentSelection = 0x3000,
         LicenseCheck = 0x4000,
+#endif
         StartMenuSelection = 0x5000,
         ReadyForInstallation = 0x6000,
         PerformInstallation = 0x7000,

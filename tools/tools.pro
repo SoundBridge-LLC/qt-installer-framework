@@ -6,4 +6,5 @@ SUBDIRS += \
     binarycreator \
     repogen \
     devtool \
-    repocompare
+    repocompare \
+    uninstallermaker

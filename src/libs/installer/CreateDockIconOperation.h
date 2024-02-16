@@ -32,36 +32,28 @@
 **
 **************************************************************************/
 
-#ifndef INSTALLERBASE_H
-#define INSTALLERBASE_H
+#ifndef CREATEDOCKICONOPERATION_H
+#define CREATEDOCKICONOPERATION_H
 
-#include "sdkapp.h"
-#include <QSharedMemory>
+#include "qinstallerglobal.h"
 
 namespace QInstaller {
-    class PackageManagerCore;
-}
 
-class InstallerBase : public SDKApp<QApplication>
+class INSTALLER_EXPORT CreateDockIconOperation : public Operation
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(InstallerBase)
-
 public:
-    InstallerBase(int &argc, char *argv[]);
-    ~InstallerBase();
+    CreateDockIconOperation();
 
-    int run();
-
-private:
-    bool isConnectedToServer(const QString &serverId);
-    bool isAnotherInstanceRunning();
-    void dumpResourceTree() const;
-    QStringList repositories(const QString &list) const;
+    void backup();
+    bool performOperation();
+    bool undoOperation();
+    bool testOperation();
+    Operation *clone() const;
 
 private:
-    QInstaller::PackageManagerCore *m_core;
-    QSharedMemory mAnotherInstanceRunning;
+    void restartDock();
 };
 
-#endif // INSTALLERBASE_H
+} // namespace QInstaller
+
+#endif // CREATEDOCKICONOPERATION_H

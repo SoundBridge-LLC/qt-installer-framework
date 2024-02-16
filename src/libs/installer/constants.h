@@ -88,6 +88,16 @@ static const QLatin1String scTitleColor("TitleColor");
 static const QLatin1String scWizardDefaultWidth("WizardDefaultWidth");
 static const QLatin1String scWizardDefaultHeight("WizardDefaultHeight");
 static const QLatin1String scProductUUID("ProductUUID");
+
+#ifdef LUMIT_INSTALLER
+// TODO(vova.y): remove this constant as unused
+static const QLatin1String scSoundBankDir("SoundBankDir");
+
+#ifdef Q_OS_OSX
+static const QLatin1String scBundleId("BundleId");
+#endif
+
+#endif
 }
 
 #endif  // CONSTANTS_H

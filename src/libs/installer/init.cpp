@@ -40,6 +40,7 @@
 #include "globalsettingsoperation.h"
 #include "environmentvariablesoperation.h"
 #include "registerfiletypeoperation.h"
+#include "addkitstospeeddialoperation.h"
 #include "selfrestartoperation.h"
 #include "installiconsoperation.h"
 #include "elevatedexecuteoperation.h"
@@ -54,6 +55,9 @@
 #include "settingsoperation.h"
 #include "consumeoutputoperation.h"
 
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_OSX)
+#   include "CreateDockIconOperation.h"
+#endif
 
 #include "utils.h"
 
@@ -212,6 +216,7 @@ void QInstaller::init()
     factory.registerUpdateOperation<GlobalSettingsOperation>(QLatin1String("GlobalConfig"));
     factory.registerUpdateOperation<EnvironmentVariableOperation>(QLatin1String("EnvironmentVariable"));
     factory.registerUpdateOperation<RegisterFileTypeOperation>(QLatin1String("RegisterFileType"));
+	factory.registerUpdateOperation<AddKitsToSpeedDialOperation>(QLatin1String("AddKitsToSpeedDial"));
     factory.registerUpdateOperation<SelfRestartOperation>(QLatin1String("SelfRestart"));
     factory.registerUpdateOperation<InstallIconsOperation>(QLatin1String("InstallIcons"));
     factory.registerUpdateOperation<ElevatedExecuteOperation>(QLatin1String("Execute"));
@@ -225,6 +230,10 @@ void QInstaller::init()
     factory.registerUpdateOperation<LicenseOperation>(QLatin1String("License"));
     factory.registerUpdateOperation<ConsumeOutputOperation>(QLatin1String("ConsumeOutput"));
     factory.registerUpdateOperation<SettingsOperation>(QLatin1String("Settings"));
+
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_OSX)
+    factory.registerUpdateOperation<CreateDockIconOperation>(QLatin1String("CreateDockIcon"));
+#endif
 
     FileDownloaderFactory::setFollowRedirects(true);
 

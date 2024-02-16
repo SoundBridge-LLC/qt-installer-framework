@@ -40,8 +40,12 @@
 #include <QtCore/QEvent>
 #include <QtCore/QMetaType>
 
+#ifdef LUMIT_INSTALLER
+#include "VectorWizard.h"
+#else
 #include <QWizard>
 #include <QWizardPage>
+#endif
 
 // FIXME: move to private classes
 QT_BEGIN_NAMESPACE
@@ -65,6 +69,11 @@ class PerformInstallationForm;
 
 
 // -- PackageManagerGui
+
+#ifdef LUMIT_INSTALLER
+using QWizard = VectorWizard;
+using QWizardPage = VectorWizardPage;
+#endif
 
 class INSTALLER_EXPORT PackageManagerGui : public QWizard
 {
@@ -93,12 +102,19 @@ public:
     void updateButtonLayout();
     static QWizard::WizardStyle getStyle(const QString &name);
 
+#ifdef LUMIT_INSTALLER
+    PackageManagerCore *core() { return m_core; }
+#endif
+
 Q_SIGNALS:
     void interrupted();
     void languageChanged();
     void finishButtonClicked();
     void gotRestarted();
     void settingsButtonClicked();
+#ifdef LUMIT_INSTALLER
+    void customWizardButtonClicked(int which);
+#endif
 
 public Q_SLOTS:
     void cancelButtonClicked();

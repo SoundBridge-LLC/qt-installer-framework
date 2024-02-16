@@ -1,6 +1,7 @@
 TEMPLATE = lib
 TARGET = installer
 INCLUDEPATH += . ..
+CONFIG += shared_and_static build_all unversioned_libname
 
 include(../7zip/7zip.pri)
 include(../kdtools/kdtools.pri)
@@ -34,7 +35,10 @@ QT += \
     xml \
     concurrent \
     widgets \
-    core-private
+    core-private \
+    gui-private \
+    widgets-private \
+    printsupport
 win32:QT += winextras
 
 HEADERS += packagemanagercore.h \
@@ -62,6 +66,7 @@ HEADERS += packagemanagercore.h \
     createshortcutoperation.h \
     createdesktopentryoperation.h \
     registerfiletypeoperation.h \
+    addkitstospeeddialoperation.h \
     environmentvariablesoperation.h \
     installiconsoperation.h \
     selfrestartoperation.h \
@@ -149,6 +154,7 @@ SOURCES += packagemanagercore.cpp \
     createshortcutoperation.cpp \
     createdesktopentryoperation.cpp \
     registerfiletypeoperation.cpp \
+    addkitstospeeddialoperation.cpp \
     environmentvariablesoperation.cpp \
     installiconsoperation.cpp \
     selfrestartoperation.cpp \
@@ -221,3 +227,27 @@ win32 {
     win32-g++*:LIBS += -lmpr -luuid
     win32-g++*:QMAKE_CXXFLAGS += -Wno-missing-field-initializers
 }
+
+osx {
+    HEADERS += CreateDockIconOperation.h \
+    MacUtils.h
+    
+    OBJECTIVE_SOURCES += CreateDockIconOperation.mm \
+    MacUtils.mm
+    LIBS += -framework AppKit
+}
+
+# LUMIT_INSTALLER: VectorWizard
+HEADERS += VectorWizard.h
+SOURCES += VectorWizard.cpp
+INCLUDEPATH += $$PWD/../../../../../VectorWidgets/Sources \
+    $$PWD/../../../../../Dependencies/Mac/Qt/lib/QtGui.framework/Headers/5.15.7/QtGui \
+    $$PWD/../../../../../Dependencies/Mac/Qt/lib/QtGui.framework/Headers/5.15.7 \
+    $$PWD/../../../../../Dependencies/Mac/Qt/lib/QtWidgets.framework/Headers/5.15.7/QtWidgets \
+    $$PWD/../../../../../Dependencies/Mac/Qt/lib/QtWidgets.framework/Headers/5.15.7
+LIBS += -lVectorWidgets
+LIBS += -L$$PWD/../../../../../Bin/Mac
+
+# LUMIT_INSTALLER: 7z
+LIBS += -L$$OUT_PWD/../7zip
+DEPENDPATH += $$PWD/../7zip

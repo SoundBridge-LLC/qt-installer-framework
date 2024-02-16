@@ -458,12 +458,15 @@ PackageInfoVector QInstallerTools::createListOfPackages(const QStringList &packa
         PackageInfo info;
         info.name = it->fileName();
         info.version = packageElement.firstChildElement(QLatin1String("Version")).text();
+#ifndef LUMIT_INSTALLER
+        // For now we need "Beta" for Mac version
         if (!QRegExp(QLatin1String("[0-9]+((\\.|-)[0-9]+)*")).exactMatch(info.version)) {
             if (ignoreInvalidPackages)
                 continue;
             throw QInstaller::Error(QString::fromLatin1("Component version for '%1' is invalid! <Version>%2</Version>")
                 .arg(fileInfo.absoluteFilePath(), info.version));
         }
+#endif
         info.dependencies = packageElement.firstChildElement(QLatin1String("Dependencies")).text()
             .split(QInstaller::commaRegExp(), QString::SkipEmptyParts);
         info.directory = it->filePath();

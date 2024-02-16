@@ -859,12 +859,18 @@ PackageManagerCore::PackageManagerCore(qint64 magicmaker, const QList<OperationB
 */
 PackageManagerCore::~PackageManagerCore()
 {
+#if defined(LUMIT_INSTALLER) && defined(Q_OS_OSX)
+    // On Mac, we are installing Lumit.app directly into /Applications
+    // We don't want to have any other files created there except Lumit.app
+#else
     if (!isUninstaller() && !(isInstaller() && status() == PackageManagerCore::Canceled)) {
         QDir targetDir(value(scTargetDir));
         QString logFileName = targetDir.absoluteFilePath(value(QLatin1String("LogFileName"),
             QLatin1String("InstallationLog.txt")));
         QInstaller::VerboseWriter::instance()->setFileName(logFileName);
     }
+#endif
+
     delete d;
 
     RemoteClient::instance().setActive(false);

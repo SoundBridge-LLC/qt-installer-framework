@@ -47,6 +47,7 @@
 #include <QCommandLineParser>
 #include <QDateTime>
 #include <QNetworkProxyFactory>
+#include <QScreen>
 
 #include <iostream>
 
@@ -200,6 +201,22 @@ int main(int argc, char *argv[])
 
         if (QInstaller::isVerbose())
             std::cout << VERSION << std::endl << BUILDDATE << std::endl << SHA << std::endl;
+
+#if defined(Q_OS_WIN)
+        {
+            QApplication app(argc, argv); // to init screens
+            //qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1"); // buggy on multi monitor system with different DPI per screen on windows
+
+            double scale = 1.0;
+            QScreen *screen = QGuiApplication::primaryScreen();
+            QRect screenGeometry = screen->geometry();
+            while(scale * 600 * 4 <= screenGeometry.width())
+                scale += 0.5;
+
+            if(scale > 1.0)
+                qputenv("QT_SCALE_FACTOR", QString::number(scale).toUtf8());
+        }
+#endif
 
         const KDSelfRestarter restarter(argc, argv);
         return InstallerBase(argc, argv).run();

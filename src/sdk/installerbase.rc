@@ -5,3 +5,31 @@ IDI_ICON1	ICON	DISCARDABLE
 #define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
 
 CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "installerbase.manifest"
+
+
+1 VERSIONINFO
+FILEVERSION 0,1,0,0
+PRODUCTVERSION 0,1,0,0
+FILEOS 0x4
+FILETYPE 0x0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904B0"
+    BEGIN
+      VALUE "CompanyName", "SoundBridge"
+      VALUE "FileDescription", "SoundBridge Setup"
+      VALUE "FileVersion", "0,1,0,0"
+      VALUE "InternalName", "SoundBridge"
+      VALUE "LegalCopyright", "Copyright 2017 SoundBridge, LLC. All rights reserved."
+      VALUE "OriginalFilename", "Setup.exe"
+      VALUE "ProductName", "SoundBridge"
+      VALUE "ProductVersion", "1.0"
+    END
+  END 
+  
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 0x04B0
+  END
+END

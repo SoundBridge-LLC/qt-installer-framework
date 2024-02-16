@@ -42,6 +42,9 @@
 #include <QtCore/QSharedDataPointer>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
+#ifdef LUMIT_INSTALLER
+#include <QtCore/QSettings>
+#endif
 
 #include <QtNetwork/QNetworkProxy>
 
@@ -155,7 +158,27 @@ public:
 
     QString controlScript() const;
 
+#ifdef LUMIT_INSTALLER
+    QString applicationId() const;
+    QString styleSheet() const;
+    bool ignoreTitles() const;
+    QString customFont1() const;
+    QString customFont2() const;
+
+    QStringList VSTPlugins() const;
+    void setVSTPlugins(const QStringList &plugins);
+
+    QString soundBankDir();
+
+    void saveQtSettings(QHash<QString, QString> &variables);
+#endif
+
 private:
+#ifdef LUMIT_INSTALLER
+    QSettings *createQtSettings() const;
+    void loadQtSettings();
+#endif
+
     class Private;
     QSharedDataPointer<Private> d;
 };

@@ -55,6 +55,9 @@ InstallerGui::InstallerGui(PackageManagerCore *core)
     }
 
     setPage(PackageManagerCore::Introduction, new IntroductionPage(core));
+#ifdef LUMIT_INSTALLER
+    setPage(PackageManagerCore::CustomIntroduction, new PackageManagerPage(core));
+#endif
     setPage(PackageManagerCore::TargetDirectory, new TargetDirectoryPage(core));
     setPage(PackageManagerCore::ComponentSelection, new ComponentSelectionPage(core));
     setPage(PackageManagerCore::LicenseCheck, new LicenseAgreementPage(core));

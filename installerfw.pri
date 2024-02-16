@@ -99,24 +99,25 @@ macx:LIBS += -framework Carbon -framework Security
 # Qt 5 sets QT_CONFIG
 # Use same static/shared configuration as Qt
 #
-!contains(CONFIG, static|shared) {
-    contains(QT_CONFIG, static): CONFIG += static
-    contains(QT_CONFIG, shared): CONFIG += shared
-}
+#!contains(CONFIG, static|shared) {
+#    contains(QT_CONFIG, static): CONFIG += static
+#    contains(QT_CONFIG, shared): CONFIG += shared
+#}
 
 QT += uitools core-private
-CONFIG(static, static|shared) {
+#CONFIG(static, static|shared) {
     win32:QT += winextras
-    QT += concurrent network qml xml
-}
+    QT += concurrent network qml xml printsupport
+#}
 CONFIG += depend_includepath no_private_qt_headers_warning c++11
 
 GIT_SHA1 = $$system(git rev-list --abbrev-commit -n1 HEAD)
 DEFINES += QT_NO_CAST_FROM_ASCII QT_USE_QSTRINGBUILDER "_GIT_SHA1_=$$GIT_SHA1" \
             IFW_VERSION_STR=$$IFW_VERSION_STR IFW_VERSION=$$IFW_VERSION
 DEFINES += IFW_REPOSITORY_FORMAT_VERSION=$$IFW_REPOSITORY_FORMAT_VERSION
+DEFINES += LUMIT_INSTALLER
 
-static {
+#static {
     LIBS += -l7z
     win32-g++*: LIBS += -lmpr -luuid
 
@@ -125,4 +126,4 @@ static {
         win32-g++*:POST_TARGETDEPS += $$IFW_LIB_PATH/libinstaller.a $$IFW_LIB_PATH/lib7z.a
         unix:POST_TARGETDEPS += $$IFW_LIB_PATH/libinstaller.a $$IFW_LIB_PATH/lib7z.a
     }
-}
+#}

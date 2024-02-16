@@ -76,9 +76,11 @@ void MetadataJob::doStart()
         return; // We can't do anything here without core, so avoid tons of !m_core checks.
     }
 
-    emit infoMessage(this, tr("Preparing meta information download..."));
+    emit infoMessage(this, tr("Preparing meta information..."));
     const bool onlineInstaller = m_core->isInstaller() && !m_core->isOfflineOnly();
     if (onlineInstaller || (m_core->isUpdater() || m_core->isPackageManager())) {
+        emit infoMessage(this, tr("Preparing meta information download..."));
+
         QList<FileTaskItem> items;
         const ProductKeyCheck *const productKeyCheck = ProductKeyCheck::instance();
         foreach (const Repository &repo, m_core->settings().repositories()) {
